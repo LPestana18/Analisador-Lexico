@@ -26,6 +26,7 @@ public class IsiScanner {
 
     public Token nextToken() {
         char currentChar;
+        Token token;
         String term = "";
         if (isEOF()) {
             return null;
@@ -40,6 +41,7 @@ public class IsiScanner {
                         estado = 1;
                     } else if (isDigit(currentChar)) {
                         estado = 3;
+                        term += currentChar;
                     } else if (isSpace(currentChar)) {
                         estado = 0;
                     } else if (isOperator(currentChar)) {
@@ -51,15 +53,32 @@ public class IsiScanner {
                 case 1:
                     if (isChar(currentChar) || isDigit(currentChar)) {
                         estado = 1;
+                        term += currentChar;
                     } else {
                         estado = 2;
                     }
                     break;
                 case 2:
                     back();
-                    Token token = new Token();
+                    token = new Token();
                     token.setType(Token.TK_IDENTIFIER);
                     token.setText(term);
+                    return token;
+                case 3:
+                    if (isDigit(currentChar)) {
+                        estado = 3;
+                        term += currentChar;
+                    } else if (!isChar(currentChar)) {
+                        estado = 4;
+                    } else {
+                        throw new RuntimeException("Unrecognized Number");
+                    }
+                    break;
+                case 4:
+                    token = new Token();
+                    token.setType(Token.TK_NUMBER);
+                    token.setText(term);
+                    back();
                     return token;
             }
         }
