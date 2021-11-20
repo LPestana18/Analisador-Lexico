@@ -1,16 +1,18 @@
 package br.com.lucaspestana.compiler.lexico;
 
+import br.com.lucaspestana.compiler.exceptions.UsjtLexicalException;
+
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class IsiScanner {
+public class UsjtScanner {
 
     private char[] content;
     private int estado;
     private int pos;
 
-    public IsiScanner(String filename) {
+    public UsjtScanner(String filename) {
         try {
             String txtConteudo;
             txtConteudo = new String(Files.readAllBytes(Paths.get(filename)), StandardCharsets.UTF_8);
@@ -47,15 +49,17 @@ public class IsiScanner {
                     } else if (isOperator(currentChar)) {
                         estado = 5;
                     } else {
-                        throw new RuntimeException("Unrecognized SYMBOL");
+                        throw new UsjtLexicalException("Unrecognized SYMBOL");
                     }
                     break;
                 case 1:
                     if (isChar(currentChar) || isDigit(currentChar)) {
                         estado = 1;
                         term += currentChar;
-                    } else {
+                    } else if (isSpace(currentChar) || isOperator(currentChar)) {
                         estado = 2;
+                    } else {
+                        throw new UsjtLexicalException("Malformed Identifier");
                     }
                     break;
                 case 2:
@@ -71,7 +75,7 @@ public class IsiScanner {
                     } else if (!isChar(currentChar)) {
                         estado = 4;
                     } else {
-                        throw new RuntimeException("Unrecognized Number");
+                        throw new UsjtLexicalException("Unrecognized Number");
                     }
                     break;
                 case 4:
@@ -79,6 +83,12 @@ public class IsiScanner {
                     token.setType(Token.TK_NUMBER);
                     token.setText(term);
                     back();
+                    return token;
+                case 5:
+                    term += currentChar;
+                    token = new Token();
+                    token.setType(Token.TK_OPERATOR);
+                    token.setText(term);
                     return token;
             }
         }
