@@ -1,4 +1,8 @@
-# Analisador-Lexico
+# Compiladores
+<p>Um compilador é um programa que lê um programa escrita numa linguagem 
+- a linguagem fonte - e o traduz para uma linguagem alvo.</p>
+
+## Analisador-Lexico
 
 * Primeira etapa de um compilador;
 * Função:
