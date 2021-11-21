@@ -16,7 +16,7 @@ public class UsjtScanner {
         try {
             String txtConteudo;
             txtConteudo = new String(Files.readAllBytes(Paths.get(filename)), StandardCharsets.UTF_8);
-            System.out.println("DEBUG ----------");
+            System.out.println("----------");
             System.out.println(txtConteudo);
             System.out.println("----------------");
             content = txtConteudo.toCharArray();
