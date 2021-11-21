@@ -20,7 +20,6 @@ public class MainClass {
         } catch (UsjtLexicalException ex) {
             System.out.println("Lexical ERROR " + ex.getMessage());
         } catch (Exception ex) {
-            System.out.println("Generic Error");
         }
     }
 }
