@@ -15,3 +15,5 @@
   * Números.
   
 
+## Análise Sintática 
+<p>A análise sintática, envolve o agrupamento dos tokens do programa fonte em frases gramaticais, que são usados pelo compilador, a fim de sintetizar a saída.</p>
