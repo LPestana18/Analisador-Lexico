@@ -16,7 +16,7 @@
 
  *A análise lexica pode ser dividido por duas etapas:
   * Escandimento
-  * Lexama
+  * Lexema
  
 
 ## Análise Sintática 
