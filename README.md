@@ -13,7 +13,11 @@
   * Identificadores;
   * Palavras reservadas e símbolos especiais;
   * Números.
-  
+
+ *A análise lexica pode ser dividido por duas etapas:
+  * Escandimento
+  * Lexama
+ 
 
 ## Análise Sintática 
 <p>A análise sintática, envolve o agrupamento dos tokens do programa fonte em frases gramaticais, que são usadas pelo compilador, a fim de sintetizar a saída. Usualmente, as frases gramaticais do programa fonte são representadas por um árvore gramatical</p>
